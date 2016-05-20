@@ -1,3 +1,4 @@
+# Takes a pyramid representation as argument and returns its' longest 'slide down'
 def longest_slide_down(pyramid):
     h = len(pyramid)
     n,l,tree=0,0,[]
@@ -14,4 +15,4 @@ def longest_slide_down(pyramid):
     return tree[0]["pow"]
 
 #test
-print longest_slide_down([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]])
+print longest_slide_down([[3], [7, 4], [2, 4, 6], [8, 5, 9, 3]]) # 23

@@ -9,7 +9,6 @@ The interesting thing about polydivisiblity is that it relates to the underlying
  123  /3 = 41   Yay!
  1232 /4 = 308  Yay!
 
-
   123220
  1      /1 = 1            Yay!
  12     /2 = 6            Yay!
@@ -17,7 +16,6 @@ The interesting thing about polydivisiblity is that it relates to the underlying
  1232   /4 = 308          Yay!
  12322  /5 = 2464.4       Oh no, that's not a round number!
  123220 /6 = 220536.333r  Oh no, that's not a round number!
-
 
   base 6   base 10
  1      = 1       -> 1     /1 = 1     Yay!
@@ -62,3 +60,5 @@ def get_polydivisible(n, b):
         i=i+1 if is_polydivisible(t, b) else i
         c=c+1
     return tenToBase(c-1,b)
+
+print get_polydivisible(34, 5)

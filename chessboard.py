@@ -26,7 +26,7 @@ Print N lines each containing M characters with the chessboard pattern.
 def chessboard(s, board = "", p = "*", q = "."):
     nrow, ncol = map(int,s.split(" "))
     for i in range(nrow):
-        board += "".join([p if j%2 != 1 else q for j in range(ncol)])+"\n"
+        board += "".join([p if j%2 != 1 else q for j in range(ncol)])+("\n" if i<nrow-1 else "")
         p,q = q,p
     return board
 

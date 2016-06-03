@@ -44,12 +44,12 @@ def anOver(n):
 
 if __name__ == "__main__":
 	start = timeit.timeit()
-	#print an(int(sys.argv[1]),)
-	#print an(int(sys.argv[1]), True)
-	#print list(set(p(int(sys.argv[1]))))
-	#print max_pn(int(sys.argv[1]))
+	print an(int(sys.argv[1]),)
+	print an(int(sys.argv[1]), True)
+	print list(set(p(int(sys.argv[1]))))
+	print max_pn(int(sys.argv[1]))
 	print anOver(int(sys.argv[1]))
 	end = timeit.timeit()
-	#print end - start
+	print end - start
 
 	

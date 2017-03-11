@@ -30,3 +30,6 @@ def int_to_english(n):
     for i in reversed(range(len(n))):
         res += triplet(n[len(n)-i-1]) + (" " + tens[i] + " " if i!=0 else "")
     return res.strip()
+
+
+print int_to_english(456.789.098.765)

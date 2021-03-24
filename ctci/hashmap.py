@@ -78,6 +78,17 @@ class HashMap:
       self.conflicts += 1
     self.hashmap[index].add(Node(key, val))
 
+  def add_optimized(self, key, val):
+    index = self.__calcIndex(key)
+    for i in range(self.length):
+      if len(self.hashmap[index]) == 0:
+        break
+      if i < (self.length - 1):
+        index = (index + 1) % self.length
+        continue
+      self.conflicts += 1
+    self.hashmap[index].add(Node(key, val))
+
 # ll = LinkedListReverse()
 # ll.add(Node(1, 1))
 # ll.add(Node(2, 2))

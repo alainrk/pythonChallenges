@@ -1,1 +1,1 @@
-Just a bunch of codewars/codekata/... python challenges
+Collection of misc challenges, algorithms and stuff

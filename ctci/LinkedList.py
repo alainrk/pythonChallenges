@@ -65,13 +65,13 @@ class LinkedList:
     self.length += 1
 
 
-# ll = LinkedList()
-# ll.add(1)
-# ll.add(2)
-# ll.add(3)
-# ll.add(4)
-# assert(len(ll) == 4)
-# assert(str(ll) == '1 2 3 4')
+ll = LinkedList()
+ll.add(1)
+ll.add(2)
+ll.add(3)
+ll.add(4)
+assert(len(ll) == 4)
+assert(str(ll) == '1 2 3 4')
 
 llRev = LinkedList(True)
 llRev.add(1)

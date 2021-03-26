@@ -49,26 +49,29 @@ class LinkedList:
   def add(self, val):
     newNode = Node(val)
 
-    if (self.isReversed):
+    if self.isReversed:
       newNode.next = self.root
+      self.root = newNode
     else:
       if self.last:
         self.last.next = newNode
 
-    self.last = newNode
+    if not self.isReversed:
+      self.last = newNode
 
     if self.length == 0:
       self.root = newNode
+      self.last = newNode
     self.length += 1
 
 
-ll = LinkedList()
-ll.add(1)
-ll.add(2)
-ll.add(3)
-ll.add(4)
-assert(len(ll) == 4)
-assert(str(ll) == '1 2 3 4')
+# ll = LinkedList()
+# ll.add(1)
+# ll.add(2)
+# ll.add(3)
+# ll.add(4)
+# assert(len(ll) == 4)
+# assert(str(ll) == '1 2 3 4')
 
 llRev = LinkedList(True)
 llRev.add(1)

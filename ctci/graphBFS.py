@@ -10,7 +10,7 @@ def bfs(root):
     for n in curr.children:
       if not n.visited:
         q.append(n)
-  return ",".join(str(visit))
+  return ",".join(list(map(lambda item: str(item), visit)))
 
 node1 = Node(1)
 node2 = Node(2)

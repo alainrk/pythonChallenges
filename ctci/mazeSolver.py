@@ -1,7 +1,10 @@
 # Backtracking maze solver
 
+import os
+
 MAZE_MAP = ["_", "X", "o", "E"]
-DEBUG = sys.env["DEBUG"]
+DEBUG = True if os.environ.get("DEBUG") else False
+
 class SolutionNode:
   def __init__(self, row, col, prevRow, prevCol):
     self.row = row
@@ -18,6 +21,8 @@ class Maze:
     self.nrows = nrows
     self.ncols = ncols
     self.finished = False
+    self.exitRow = nrows - 1
+    self.exitCol = ncols - 1
 
   def __str__(self):
     string = " " + "|".join([str(r) for r in range(self.nrows)]) + '\n'
@@ -31,8 +36,9 @@ class Maze:
     return string
 
   def handleSolution(self, solution, k):
-    print(f'Solution: {solution}')
-    sys.exit(0)
+    strSolution = [f'({str(s.row)}, {str(s.col)})' for s in solution]
+    self.finished = True
+    print(f'Solution: {" => ".join(strSolution)}')
 
   # Check boundary constraints
   # Check avoiding get back to the previous cell
@@ -85,7 +91,7 @@ class Maze:
 
   def isSolution(self, solution, k):
     currentMove = solution[k - 1]
-    return self.maze[currentMove.row][currentMove.col] == 3
+    return currentMove.row == self.exitRow and currentMove.col == self.exitCol
 
   def backtrack(self, solution, k):
     if self.isSolution(solution, k):
@@ -104,12 +110,13 @@ class Maze:
       print('\n', str(self), '\n')
       self.backtrack(solution, k)
 
+      # Comment this to find all the possibile solutions
+      if self.finished:
+        return
+
       # Undo
       solution.pop()
       self.maze[ak.row][ak.col] = 0
-
-    if self.finished:
-      return
 
 def main():
   mazeMatrix = [

@@ -23,12 +23,13 @@ class Maze:
   # Check boundary constraints
   # Check avoiding get back to the previous cell
   # Check wall constraints
+  # Check path loops
   def isValidMove(self, row, col, prevRow, prevCol):
     okBoundaries = 0 <= row < self.nrows and 0 <= col < self.ncols
     noPreviousCell = not (prevRow == row and prevRow == col)
     noWalls = self.maze[row][col] != 1
     noLoops = self.maze[row][col] != 2
-    # TODO Check loops
+
     print(f'isValidMove: row {row}, col {col}, prevRow {prevRow}, prevCol {prevCol}')
     print(f'okBoundaries {okBoundaries}, noPreviousCell {noPreviousCell}, noWalls {noWalls}, noLoops {noLoops}\n')
     return okBoundaries and noPreviousCell and noWalls

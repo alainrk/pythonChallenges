@@ -159,4 +159,5 @@ def main():
   maze.backtrack([SolutionNode(0, 0, 0, 0)], 1)
 
 if __name__ == "__main__":
+  print(chr(27) + "[2J")
   main()

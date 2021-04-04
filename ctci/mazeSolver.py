@@ -1,8 +1,21 @@
 # Backtracking maze solver
 
 import os
+import time
 
-MAZE_MAP = ["_", "X", "o", "E"]
+class bcolors:
+  HEADER = '\033[95m'
+  OKBLUE = '\033[94m'
+  OKCYAN = '\033[96m'
+  GREEN = '\033[92m'
+  RED = '\033[31m'
+  WARNING = '\033[93m'
+  FAIL = '\033[91m'
+  ENDC = '\033[0m'
+  BOLD = '\033[1m'
+  UNDERLINE = '\033[4m'
+
+MAZE_MAP = [" ", bcolors.RED + "X" + bcolors.ENDC, bcolors.GREEN + "o" + bcolors.ENDC, "E"]
 DEBUG = True if os.environ.get("DEBUG") else False
 
 class SolutionNode:
@@ -33,7 +46,7 @@ class Maze:
         strRow.append(MAZE_MAP[col])
       string += "|"
       string += "|".join(strRow)
-      string += "|\n"
+      string += f'{"=>" if r == (self.nrows - 1) else "|"}\n'
     return string
 
   def handleSolution(self, solution, k):
@@ -100,7 +113,14 @@ class Maze:
       solution.append(ak)
       self.maze[ak.row][ak.col] = 2
 
+      # Clean Terminal
+      print(chr(27) + "[2J")
+      # Print maze status
       print('\n', str(self))
+      # if len(sk) == 0:
+      #   print('BACKTRACK!')
+      # Sleep a bit
+      time.sleep(0.25)
       self.backtrack(solution, k)
 
       # Comment this to find all the possibile solutions

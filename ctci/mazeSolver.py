@@ -25,14 +25,15 @@ class Maze:
     self.exitCol = ncols - 1
 
   def __str__(self):
-    string = " " + "|".join([str(r) for r in range(self.nrows)]) + '\n'
+    string = "  " + "|".join([str(r) for r in range(self.ncols)]) + '\n'
     for r, row in enumerate(self.maze):
       strRow = []
       string += f'{r} '
       for c, col in enumerate(row):
         strRow.append(MAZE_MAP[col])
+      string += "|"
       string += "|".join(strRow)
-      string += "\n"
+      string += "|\n"
     return string
 
   def handleSolution(self, solution, k):
@@ -40,10 +41,6 @@ class Maze:
     self.finished = True
     print(f'Solution: {" => ".join(strSolution)}')
 
-  # Check boundary constraints
-  # Check avoiding get back to the previous cell
-  # Check wall constraints
-  # Check path loops
   def isValidMove(self, row, col, prevRow, prevCol):
     okBoundaries, noPreviousCell, noWalls, noLoops = (False for i in range(4))
 
@@ -69,19 +66,15 @@ class Maze:
     down = (currentMove.row + 1, currentMove.col)
     left = (currentMove.row, currentMove.col - 1)
 
-    # if (0 <= up[0] < self.nrows and 0 <= up[1] < self.ncols) and (currentMove.prevRow != up[0] and currentMove.prevRow != up[1]):
     if self.isValidMove(up[0], up[1], currentMove.prevRow, currentMove.prevCol):
       moves.append(SolutionNode(up[0], up[1], currentMove.row, currentMove.col))
 
-    # if (0 <= right[0] < self.nrows and 0 <= right[1] < self.ncols) and (currentMove.prevRow != right[0] and currentMove.prevRow != right[1]):
     if self.isValidMove(right[0], right[1], currentMove.prevRow, currentMove.prevCol):
       moves.append(SolutionNode(right[0], right[1], currentMove.row, currentMove.col))
 
-    # if (0 <= down[0] < self.nrows and 0 <= down[1] < self.ncols) and (currentMove.prevRow != down[0] and currentMove.prevRow != down[1]):
     if self.isValidMove(down[0], down[1], currentMove.prevRow, currentMove.prevCol):
       moves.append(SolutionNode(down[0], down[1], currentMove.row, currentMove.col))
 
-    # if (0 <= left[0] < self.nrows and 0 <= left[1] < self.ncols) and (currentMove.prevRow != left[0] and currentMove.prevRow != left[1]):
     if self.isValidMove(left[0], left[1], currentMove.prevRow, currentMove.prevCol):
       moves.append(SolutionNode(left[0], left[1], currentMove.row, currentMove.col))
 
@@ -107,7 +100,7 @@ class Maze:
       solution.append(ak)
       self.maze[ak.row][ak.col] = 2
 
-      print('\n', str(self), '\n')
+      print('\n', str(self))
       self.backtrack(solution, k)
 
       # Comment this to find all the possibile solutions
@@ -119,16 +112,30 @@ class Maze:
       self.maze[ak.row][ak.col] = 0
 
 def main():
+  # mazeMatrix = [
+  #   [2, 1, 0, 1, 1, 1, 0],
+  #   [0, 1, 0, 0, 0, 1, 0],
+  #   [0, 0, 0, 1, 0, 1, 0],
+  #   [0, 1, 0, 0, 0, 0, 0],
+  #   [0, 1, 1, 0, 0, 1, 0],
+  #   [0, 0, 1, 0, 1, 1, 0],
+  #   [1, 0, 1, 0, 0, 0, 0],
+  # ]
+
   mazeMatrix = [
-    [2, 1, 0, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 1, 0],
-    [0, 0, 0, 1, 0, 1, 0],
-    [0, 1, 0, 0, 0, 0, 0],
-    [0, 1, 1, 0, 0, 1, 0],
-    [0, 0, 1, 0, 1, 1, 0],
-    [1, 0, 1, 0, 0, 0, 3],
+    [2, 1, 0, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 0, 1, 0],
+    [0, 0, 0, 1, 1, 0, 1, 0],
+    [0, 1, 0, 0, 1, 0, 0, 0],
+    [0, 1, 1, 0, 1, 0, 1, 0],
+    [0, 0, 1, 0, 0, 1, 0, 0],
+    [1, 0, 1, 0, 1, 0, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [1, 0, 0, 0, 1, 0, 0, 0],
+    [1, 0, 1, 0, 1, 1, 0, 0],
   ]
-  maze = Maze(mazeMatrix, 7, 7)
+
+  maze = Maze(mazeMatrix, len(mazeMatrix), len(mazeMatrix[0]))
   maze.backtrack([SolutionNode(0, 0, 0, 0)], 1)
 
 if __name__ == "__main__":

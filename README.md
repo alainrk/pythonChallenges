@@ -4,5 +4,5 @@
 
 ### Maze solver
 
-![Maze solver image](https://github.com/alainrk/challengesAndAlgorithms/master/assets/maze.gif)
+![Maze solver image](https://github.com/alainrk/challengesAndAlgorithms/raw/master/assets/maze.gif)
 

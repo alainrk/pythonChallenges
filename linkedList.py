@@ -15,15 +15,13 @@ class LinkedList:
 
   def reverse (self):
     prev = None
-    next = None
-    while self.root is not None:
-      next = self.root.next
-      self.root.next = prev
-      prev = self.root
-      self.root = next
+    curr = self.root
+    while curr is not None:
+      next = curr.next
+      curr.next = prev
+      prev = curr
+      curr = next
     self.root = prev
-
-
 
 root = Node(
   10,

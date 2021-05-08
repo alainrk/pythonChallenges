@@ -37,26 +37,57 @@ function calcCapacity (size) {
 
 class Vector {
   constructor (...items) {
-    this.size = items.length
-    this.capacity = calcCapacity(size)
-    this.vector = new Array(this.capacity)
+    this.__size = items.length
+    this.__cap = calcCapacity(this.__size)
+    this.vector = new Array(this.__cap)
+    for (let i = 0; i < this.__size; i++) {
+      this.vector[i] = items[i]
+    }
   }
 
   size () {
-    return this.size
+    return this.__size
   }
 
-  capacity () {
-    return this.capacity
+  cap () {
+    return this.__cap
   }
 
   isEmpty () {
-    return this.size === 0
+    return this.__size === 0
   }
 
-  
+  increaseCapacity (newSize) {
+    const newCapacity = calcCapacity(newSize)
+    if (newCapacity > this.__cap) {
+      this.__cap = newCapacity
+      const newVector = new Array(newCapacity)
+      for (let i = 0; i < this.__size; i++) {
+        newVector[i] = this.vector[i]
+      }
+      this.vector = newVector
+    }
+  }
+
+  at (index) {
+    if (index > this.__size - 1) {
+      throw new Error('Vector: index out of bound')
+    }
+    return this.vector[index]
+  }
+
+  push (item) {
+    this.increaseCapacity(this.__size + 1)
+    this.vector[this.__size] = item
+    this.__size++
+  }
 }
 
+const v = new Vector(1, 2, 3)
+for (let i = 4; i < 35; i++) {
+  v.push(i)
+  console.log(`Cap = ${v.cap()}, size = ${v.size()}, Vec = ${v.vector}`)
+}
 // const assert = require('assert')
 // assert.deepStrictEqual(calcCapacity(1), 16)
 // assert.deepStrictEqual(calcCapacity(2), 16)

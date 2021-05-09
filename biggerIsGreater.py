@@ -15,16 +15,22 @@ abc => [acb, bac, bca, cba, cab] => Result: acb
 
 """
 
-
 def minGreater(w):
-  arr = list(w)
-  for i in range(len(arr) - 1, 0, -1):
-    if arr[i] > arr[i-1]:
-      arr[i], arr[i-1] = arr[i-1], arr[i]
-      # TODO
-      return ''.join(arr)
-  return 'no answer'
-
+  original = list(w)
+  for i in range(len(original) - 2, -1, -1):
+    minAmongGreater = None
+    minAmongGreaterIndex = None
+    for j in range(i + 1, len(original)):
+      # Find the number that's the minimum among the greater than the current w[i]
+      if original[i] < original[j] and (minAmongGreater is None or original[j] < minAmongGreater):
+        minAmongGreater = original[j]
+        minAmongGreaterIndex = j
+    if minAmongGreater is not None:
+      firstPart = original[:i]
+      central = [minAmongGreater]
+      secondPart = sorted(original[i:minAmongGreaterIndex] + original[minAmongGreaterIndex+1:len(original)])
+      return "".join(firstPart + central + secondPart)
+  return "no answer"
 
 def solve(w):
   result = [minGreater(x) for x in w.split('\n')]

@@ -65,7 +65,6 @@ class Vector {
       for (let i = 0; i < this.__size; i++) {
         newVector[i] = this.vector[i]
       }
-      this.vector = newVector
     }
   }
 

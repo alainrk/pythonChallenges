@@ -25,6 +25,7 @@ def phoneNumberMnemonics(phoneNumber):
   for c in memo[phoneNumber[0]]:
     for f in fwd:
       result.append(c + f)
+  # memo[phoneNumber] = result
   return result
 
 phoneNumberMnemonics('3485932093840223')

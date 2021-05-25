@@ -9,9 +9,7 @@ class BinaryTree:
 def findSuccessor(tree, node):
 	if node.right is not None:
 		return findLeftmost(node.right)
-	if node.parent is not None:
-		return findLeftyParent(node)
-	return None
+	return findLeftyParent(node)
 
 def findLeftyParent(node):
 	curr = node

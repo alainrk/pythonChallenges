@@ -23,3 +23,7 @@ def spiralTraverse(array):
 		upBound += 1
 		bottomBound -= 1
 	return res
+
+
+def getColumn(array, idx):
+	return [array[r][idx] for r in range(len(array))]

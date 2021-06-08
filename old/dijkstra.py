@@ -11,18 +11,16 @@ def dijkstra(graph, source, dest):
             seen.add(v)
             if v == dest:
                 return cost, path
-            for (next, c) in graph[v].iteritems():
-                if v==6: print next, c
-                heapq.heappush(q, (cost + c, next, path))
-
+            for neighbour, ncost in graph[v].items():
+                heapq.heappush(q, (cost + ncost, neighbour, path))
 
 graph = {
-         1:{2:7, 3:9, 6:14},
-         2:{1:7, 3:10, 4:15},
-         3:{1:9, 2:10, 4:11, 6:2},
-         4:{15:2, 3:11, 5:6},
-         5:{4:6, 6:9},
-         6:{1:14, 3:2, 5:9}
-         }
+    1: { 2: 7, 3: 9, 6: 14 },
+    2: { 1: 7, 3: 10, 4: 15 },
+    3: { 1: 9, 2: 10, 4: 11, 6: 2 },
+    4: { 2: 15, 3: 11, 5: 6 },
+    5: { 4: 6, 6: 9 },
+    6: { 1: 14, 3: 2, 5: 9 }
+}
 
-print dijkstra(graph, 1, 5)
+print(dijkstra(graph, 1, 5))

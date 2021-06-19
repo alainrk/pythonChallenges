@@ -1,16 +1,14 @@
 def canConstruct(bank, word):
-  res = [None] * (len(word) + 1)
-  res[0] = [[]]
+  res = [[] for _ in range(len(word) + 1)]
+  res[0].append([])
 
   for i in range(len(res)):
-    if res[i] is None:
+    if len(res[i]) == 0:
       continue
     for bw in bank:
       chunk = word[i:i + len(bw)]
       if chunk == bw:
         aheadIdx = i + len(bw)
-        if res[aheadIdx] is None:
-          res[aheadIdx] = []
         for arr in res[i]:
           res[aheadIdx].append(arr + [bw])
   print(res)

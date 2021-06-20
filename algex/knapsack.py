@@ -1,48 +1,57 @@
 def knapsackProblem(items, capacity):
 	# [[v0, w0], [v1, w1]]
-	caps = [None for _ in range(capacity + 1)]
-	vals = [0 for _ in range(capacity + 1)]
-	used = [set() for _ in range(capacity + 1)]
-	caps[0] = []
-	maxCap = 0
+	caps = [{} for _ in range(capacity + 1)]
+	caps[0][0] = set()
+	weightWithMaxVal, maxVal = 0, 0
 
 	for c in range(len(caps)):
-		if caps[c] is None:
+		if not len(caps[c]):
 			continue
+
 		for i, item in enumerate(items):
+			for j, _cap in enumerate(caps):
+				print(j, _cap)
+			print('_____')
 			value, weight = item
-			if i in used[c]:
-				continue
-			totalWeight = c + weight
-			totalVal = vals[c] + value
-			if totalWeight > capacity:
-				continue
-			if totalVal < vals[totalWeight]:
-				continue
-			maxCap = max(maxCap, totalWeight)
-			vals[totalWeight] = totalVal
-			caps[totalWeight] = caps[c] + [i]
-			used[totalWeight] = set(caps[totalWeight])
-	return [vals[maxCap], caps[maxCap]]
+
+			for cval, celems in caps[c].items():
+				if i in celems:
+					continue
+
+				totalWeight = c + weight
+				if totalWeight > capacity:
+					continue
+
+				totalVal = cval + value
+				caps[totalWeight][totalVal] = celems.union(set([i]))
+
+				if totalVal > maxVal:
+					weightWithMaxVal, maxVal = totalWeight, totalVal
+
+
+	maxVal, maxElems = 0, []
+	for val, elems in caps[weightWithMaxVal].items():
+		if maxVal <= val:
+			maxVal, maxElems = val, [x for x in elems]
+
+	print([maxVal, maxElems])
+	return [maxVal, maxElems]
 
 
 # print(knapsackProblem([[1, 2], [4, 3], [5, 6], [6, 7]], 10))
 
 print(knapsackProblem([
-    [465, 100],
-    [400, 85],
-    [255, 55],
     [350, 45],
-    [650, 130],
-    [1000, 190],
-    [455, 100],
-    [100, 25],
-    [1200, 190],
-    [320, 65],
-    [750, 100],
-    [50, 45],
     [550, 65],
     [100, 50],
     [600, 70],
-    [240, 40]
 		], 200) == [1500, [3, 12, 14]])
+
+# print(knapsackProblem([
+# [1, 100],
+# [350, 45],
+# [550, 65],
+# [600, 70],
+# ], 200) == [1500, [3, 12, 14]])
+
+

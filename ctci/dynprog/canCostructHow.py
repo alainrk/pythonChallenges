@@ -16,6 +16,7 @@ def canConstruct(bank, word):
 
 
 canConstruct(['ab', 'abc', 'cd', 'def', 'abcd'], 'abcdef')
+canConstruct(['ab', 'abc', 'cd', 'def', 'abcd', 'ef', 'c'], 'abcdef')
 canConstruct(['fizz', 'buzz', 'fizzbuzz'], 'fizzbuzz')
 canConstruct(['fizz', 'buzz'], 'fizzbuzz')
 canConstruct(['a', 'a'], 'a')

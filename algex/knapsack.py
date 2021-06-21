@@ -9,9 +9,9 @@ def knapsackProblem(items, capacity):
 			continue
 
 		for i, item in enumerate(items):
-			for j, _cap in enumerate(caps):
-				print(j, _cap)
-			print('_____')
+			# for j, _cap in enumerate(caps):
+			# 	print(j, _cap)
+			# print('_____')
 			value, weight = item
 
 			for cval, celems in caps[c].items():
@@ -34,7 +34,7 @@ def knapsackProblem(items, capacity):
 		if maxVal <= val:
 			maxVal, maxElems = val, [x for x in elems]
 
-	print([maxVal, maxElems])
+	# print([maxVal, maxElems])
 	return [maxVal, maxElems]
 
 

@@ -15,3 +15,4 @@ def fourNumberSum(array, targetSum):
 			sums[s].append([array[c], array[a]])
 	return solution
 
+fourNumberSum([7, 6, 4, -1, 1, 2], 16)

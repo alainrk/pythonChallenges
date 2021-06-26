@@ -1,35 +1,31 @@
 def countInversions(array):
-	count = 0
-	sortedArr = []
-	for i in range(len(array) - 1, -1, -1):
-		idx = bsearch(sortedArr, array[i])
-		sortedArr.insert(idx, array[i])
-		count += idx
+	_, count = helper(array)
 	return count
 
-def bsearch(array, v):
-	if len(array) == 0:
-		return 0
-	start, end = 0, len(array) - 1
-	while start <= end:
-		mid = (start + end) // 2
-		if isRightSpot(array, mid, v):
-			return mid
-		elif v <= array[mid]:
-			end = mid - 1
+def helper(array):
+	if len(array) < 2:
+		return array, 0
+
+	mid = len(array) // 2
+	print('arr=', array)
+	print('mid=', mid)
+	left, lcount = helper(array[:mid])
+	right, rcount = helper(array[mid:])
+	l, r, count = 0, 0, 0
+	res = []
+
+	print('\tleft=', left)
+	print('\tright=', right)
+	while l < len(left) and r < len(right):
+		if left[l] <= right[r]:
+			res.append(left[l])
+			l += 1
 		else:
-			start = mid + 1
-	return -1
+			count += mid - l
+			res.append(right[r])
+			r += 1
+	res += left[l:] + right[r:]
+	print('res=', res, '\n')
+	return res, lcount + count + rcount
 
-def isRightSpot(array, idx, val):
-	if array[idx] == val:
-		return True
-	if idx == 0 and val < array[0]:
-		return True
-	if idx == len(array) - 1 and val > array[-1]:
-		return True
-	if idx > 0 and idx < len(array) - 1 and array[idx - 1] < val < array[idx + 1]:
-		return True
-	return False
-
-countInversions([2, 3, 3, 1, 9, 5, 6])
+countInversions([5, -1, 2, -4, 3, 4, 19, 87, 762, -8, 0])

@@ -26,6 +26,8 @@ class LRUCache:
 	def touch(self, key):
 		isNew = True
 		if key in self.cache:
+			if self.last == self.cache[key]["node"]:
+				self.last = self.cache[key]["node"].prev
 			self.cache[key]["node"].delete()
 			isNew = False
 
@@ -56,7 +58,8 @@ class LRUCache:
 	def getValueFromKey(self, key):
 		if key not in self.cache:
 			return None
-		self.touch(key)
+		node = self.touch(key)
+		self.cache[key]["node"] = node
 		return self.cache[key]["value"]
 
 	def getMostRecentKey(self):
@@ -65,14 +68,11 @@ class LRUCache:
 		return None
 
 
-l = LRUCache(3)
-l.insertKeyValuePair("b", 2)
+l = LRUCache(4)
 l.insertKeyValuePair("a", 1)
+l.insertKeyValuePair("b", 2)
 l.insertKeyValuePair("c", 3)
-l.getMostRecentKey() # "c"
+l.insertKeyValuePair("d", 4)
 l.getValueFromKey("a") # 1
-l.getMostRecentKey() # "a"
-l.insertKeyValuePair("d", 4) # 11 3 the cache had 3 entries; the least recently used one is evicted
-l.getValueFromKey ("b") # None
-l.insertKeyValuePair("a", 5) # 11 "a" already exists in the cache SO its value just gets replaced
-l.getValueFromKey("a") # 5
+l.insertKeyValuePair("e", 5)
+l.getValueFromKey("a") # 1

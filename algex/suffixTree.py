@@ -3,10 +3,10 @@
 # Feel free to add new properties and methods
 # to the class.
 class SuffixTrie:
-    def __init__(self, string):
-        self.root = {}
-        self.endSymbol = "*"
-        self.populateSuffixTrieFrom(string)
+	def __init__(self, string):
+		self.root = {}
+		self.endSymbol = "*"
+		self.populateSuffixTrieFrom(string)
 
 	def add(self, word):
 		curr = self.root
@@ -16,12 +16,12 @@ class SuffixTrie:
 			curr = curr[char]
 		curr[self.endSymbol] = True
 
-    def populateSuffixTrieFrom(self, string):
+	def populateSuffixTrieFrom(self, string):
 		for i in range(len(string) - 1, -1, -1):
 			self.add(string[i:])
 
-    def contains(self, string):
-        curr = self.root
+	def contains(self, string):
+		curr = self.root
 		for char in string:
 			if char not in curr:
 				return False

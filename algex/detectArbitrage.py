@@ -1,4 +1,4 @@
-from math import log10
+import math
 
 def detectArbitrage(rates):
 	n = len(rates)
@@ -28,7 +28,5 @@ def relaxation(graph, dists):
 	return updated
 
 def createGraph(rates):
-	return [[-log10(edge) for edge in row] for row in rates]
+	return [[-math.log10(edge) for edge in row] for row in rates]
 
-def convert(amount, change):
-	return amount * change
